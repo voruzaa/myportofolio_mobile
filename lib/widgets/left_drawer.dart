@@ -10,7 +10,6 @@ class LeftDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          // TODO: Bagian drawer header
           const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.indigo,
@@ -37,7 +36,6 @@ class LeftDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // TODO: Bagian routing
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
@@ -56,9 +54,6 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Add Project'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
-              /*
-              TODO: Buatlah routing ke halaman ProjectFormPage yang akan dibuat nanti.
-              */
               Navigator.push(
                 context,
                 MaterialPageRoute(

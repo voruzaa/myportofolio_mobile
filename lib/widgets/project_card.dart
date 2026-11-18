@@ -25,7 +25,6 @@ class ItemCard extends StatelessWidget {
             );
           // Navigate ke halaman yang sesuai
           if (item.name == "Tambah Proyek") {
-            // TODO: Gunakan Navigator.push() untuk melakukan navigasi ke MaterialPageRoute yang mencakup ProjectFormPage
             Navigator.push(
               context,
               MaterialPageRoute(
