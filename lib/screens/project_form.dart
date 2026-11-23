@@ -34,7 +34,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
             'Add Project Form',
           ),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -133,6 +133,12 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       _technologies = value!;
                     });
                   },
+                  validator: (String? value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return "Teknologi tidak boleh kosong!";
+                    }
+                    return null;
+                  },
                 ),
               ),
               // === Project Link ===
@@ -151,6 +157,19 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       _projectLink = value!;
                     });
                   },
+                  validator: (String? value) {
+                    final text = value?.trim() ?? '';
+                    if (text.isEmpty) {
+                      return null;
+                    }
+                    final uri = Uri.tryParse(text);
+                    final isHttp = uri != null &&
+                        (uri.scheme == 'http' || uri.scheme == 'https');
+                    if (!isHttp || uri.host.isEmpty) {
+                      return "Tautan harus diawali http:// atau https://";
+                    }
+                    return null;
+                  },
                 ),
               ),
               // === Tombol Simpan ===
@@ -160,8 +179,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
+                      backgroundColor: WidgetStateProperty.all(
+                        Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -186,8 +206,15 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                                 TextButton(
                                   child: const Text('OK'),
                                   onPressed: () {
+                                    _formKey.currentState?.reset();
+                                    setState(() {
+                                      _projectName = "";
+                                      _description = "";
+                                      _category = "Web Development";
+                                      _technologies = "";
+                                      _projectLink = "";
+                                    });
                                     Navigator.pop(context);
-                                    _formKey.currentState!.reset();
                                   },
                                 ),
                               ],
