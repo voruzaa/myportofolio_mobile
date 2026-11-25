@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/main.dart';
 import 'package:myportofolio_mobile/screens/education_form.dart';
 
@@ -55,8 +55,9 @@ void main() {
     expect(find.text('Nama institusi tidak boleh kosong!'), findsOneWidget);
   });
 
-  testWidgets('formulir edukasi menampilkan ringkasan setelah valid',
-      (tester) async {
+  testWidgets('formulir edukasi menampilkan ringkasan setelah valid', (
+    tester,
+  ) async {
     await tester.pumpWidget(const MaterialApp(home: EducationFormPage()));
 
     await tester.enterText(
